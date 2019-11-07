@@ -22,11 +22,13 @@ class Login extends Component {
         }
     render() {
 
-        const {usersInfo , authedUser } = this.props
-        const {  toHome } = this.state
+        const {usersInfo , authedUser,location } = this.props
 
-        if (toHome === true) {
-            return <Redirect to={`/${authedUser}`} />
+        const { from } = location.state || { from: { pathname: `/${authedUser}`  }}
+        if(authedUser !== null) {
+            return (
+                <Redirect to={from} />
+            )
         }
     return (
         <React.Fragment>
@@ -39,7 +41,7 @@ class Login extends Component {
     )}
     }
 
-function mapStateToProps ({ questions , authedUser , users }) {
+function mapStateToProps ({  authedUser , users }) {
     const usersInfo = Object.values(users)
   return {
     usersInfo:usersInfo,

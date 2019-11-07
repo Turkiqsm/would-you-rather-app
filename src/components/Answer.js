@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import MediaControlCard from './MediaControlCard'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import {handleSaveQuestionAnswer} from '../actions/users'
@@ -15,6 +14,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Page404 from './Page404'
 
 class Answer extends Component {
     state = {
@@ -42,7 +42,14 @@ class Answer extends Component {
       }
     render() {
         const {  toHome,value } = this.state
-        const { name, avatar,authedUser ,answers } = this.props
+        const { name, avatar,authedUser ,answers,err } = this.props
+        if(err) {
+            return (
+                <div>
+                    <Page404/>
+                </div>
+            )
+        }
             if (toHome === true) {
                 return <Redirect to={`/${authedUser}`}  />
             }
@@ -91,6 +98,12 @@ class Answer extends Component {
 }
 function mapStateToProps ({ questions,authedUser, users}, props) {
     const { id } = props.match.params
+    if(questions[id] === undefined) {
+        const err = true;
+        return {
+            err
+        }
+    }
     const author = questions[id].author
     const name = users[questions[id].author].name
     const avatar = users[author].avatarURL

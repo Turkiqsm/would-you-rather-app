@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom'
 import '../App.css'
 import { Redirect } from 'react-router-dom'
@@ -46,7 +45,7 @@ export default function Nav (props) {
       <Toolbar>
         {props.authedUser === null ? 
         <Fragment>
-        {/* <Redirect to='/Login' /> */}
+        <Redirect to='/login' />
         <Typography className="header" variant="h6" >
         Would You Rather App
         </Typography>
@@ -68,9 +67,6 @@ export default function Nav (props) {
         <Typography className="header" variant="h6" >
         Would You Rather App
         </Typography>
-        <Typography style={{marginLeft:'2%'}} variant="h7" >
-        {props.user.name}
-        </Typography>
 
         <Typography mx="auto" variant="h6" className={classes.title}>
         
@@ -85,6 +81,9 @@ export default function Nav (props) {
         LeaderBoard
       </NavLink>
     </Typography>
+        </Typography>
+        <Typography className="header" style={{marginRight:'2%'}} variant="h7" >
+        {props.user.name}
         </Typography>
         <Typography>
       <NavLink to="/login" onClick={handle_LogOut} activeclass="active" color="inherit" className={classes.link}>

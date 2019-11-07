@@ -12,6 +12,8 @@ import { setAuthedUser } from '../actions/authedUser';
 import Login from './Login'
 import Answer from './Answer'
 import Page404 from './Page404'
+import PrivateRoute from './PrivateRoute'
+
 
 class App extends Component {
   componentDidMount() {
@@ -28,27 +30,17 @@ class App extends Component {
         <Fragment>
         <Nav user={user} logOut={this.logOut} authedUser={authedUser} />
         <LoadingBar/>
-        {this.props.loading === true
+        {this.props.loading === true 
           ? 
-          <div className='container'>
-               <div>
-               <Switch>
-                  <Route path='/LeaderBoard' exact component={Leaderboard} />
-                  <Route path='/' exact component={Login} />
-                  <Route path='/login' exact component={Login} />
-                  <Route path='/add' exact component={Login} />
-                  <Route component={Page404} />
-               </Switch>
-                </div>
-          </div>
+           null
           :<div className='container'>
                <div>
                <Switch>
-                  <Route path={`/${authedUser}`} exact component={Dashboard} />
-                  <Route path='/questions/:id' exact component={Answer}/>
-                  <Route path='/leaderboard' exact component={Leaderboard} />
                   <Route path='/login' exact component={Login} />
-                  <Route path='/add' exact component={NewQuestions} />
+                  <PrivateRoute path={`/${authedUser}`} exact component={Dashboard} />
+                  <PrivateRoute path='/questions/:id' exact component={Answer}/>
+                  <PrivateRoute path='/leaderboard' exact component={Leaderboard} />
+                  <PrivateRoute path='/add' exact component={NewQuestions} />
                   <Route component={Page404} />
                </Switch>
                 </div>
