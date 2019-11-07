@@ -42,8 +42,7 @@ export default function MediaControlCard(props) {
     setValue(event.target.value);
   };
   const handleSubmit= () =>{
-      console.log(value)
-    //   props.handleSubmit(value)
+      props.handleSubmit(value, props.authedUser, props.questionID)
   }
   return (
       <Card className={classes.card}>

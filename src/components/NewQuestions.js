@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import { Redirect } from 'react-router-dom'
 import {handleSaveQuestion} from '../actions/questions'
+import Avatar from '@material-ui/core/Avatar';
 
         
 class NewQuestions extends Component { 
@@ -44,7 +45,7 @@ class NewQuestions extends Component {
     }
     render() {
         const {  toHome } = this.state
-        const { authedUser } = this.props
+        const { authedUser,avatar } = this.props
         
         if (toHome === true) {
           return <Redirect to={`/${authedUser}`}  />
@@ -61,6 +62,7 @@ class NewQuestions extends Component {
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                 <Container maxWidth="sm">
+                <Avatar alt="Remy Sharp" src={avatar} />
                 <Typography component="h6" variant="subtitle1">
                 Would You Rather
                 </Typography>
@@ -112,9 +114,12 @@ class NewQuestions extends Component {
 }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser,users }) {
+    const avatar = users[authedUser].avatarURL
+
     return {
-      authedUser: authedUser
+        avatar:avatar,
+        authedUser: authedUser
     }
   }
   

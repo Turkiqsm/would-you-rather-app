@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route ,Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
@@ -11,7 +11,7 @@ import '../App.css'
 import { setAuthedUser } from '../actions/authedUser';
 import Login from './Login'
 import Answer from './Answer'
-
+import Page404 from './Page404'
 
 class App extends Component {
   componentDidMount() {
@@ -21,28 +21,36 @@ class App extends Component {
       this.props.dispatch(setAuthedUser(null))
     }
   render(){
-    const {authedUser} = this.props
+    const {authedUser,user} = this.props
   return (
     <div className="App">
       <Router>
         <Fragment>
-        <Nav logOut={this.logOut} authedUser={authedUser} />
+        <Nav user={user} logOut={this.logOut} authedUser={authedUser} />
         <LoadingBar/>
         {this.props.loading === true
           ? 
           <div className='container'>
                <div>
+               <Switch>
                   <Route path='/LeaderBoard' exact component={Leaderboard} />
-                  <Route path='/Login' exact component={Login} />
+                  <Route path='/' exact component={Login} />
+                  <Route path='/login' exact component={Login} />
+                  <Route path='/add' exact component={Login} />
+                  <Route component={Page404} />
+               </Switch>
                 </div>
           </div>
           :<div className='container'>
                <div>
+               <Switch>
                   <Route path={`/${authedUser}`} exact component={Dashboard} />
                   <Route path='/questions/:id' exact component={Answer}/>
-                  <Route path='/LeaderBoard' exact component={Leaderboard} />
-                  <Route path='/Login' exact component={Login} />
-                  <Route path='/NewQuestions' exact component={NewQuestions} />
+                  <Route path='/leaderboard' exact component={Leaderboard} />
+                  <Route path='/login' exact component={Login} />
+                  <Route path='/add' exact component={NewQuestions} />
+                  <Route component={Page404} />
+               </Switch>
                 </div>
           </div>}
         </Fragment>
@@ -52,10 +60,12 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser,questions }) {
+function mapStateToProps ({ users,authedUser,questions }) {
+  const user = users[authedUser]
   return {
     loading: questions ,
-    authedUser: authedUser
+    authedUser: authedUser,
+    user: user
 
   }
 }

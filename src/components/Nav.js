@@ -44,19 +44,19 @@ export default function Nav (props) {
     <div className={classes.root}>
     <AppBar style={{textAlign: 'center'}} position="static">
       <Toolbar>
-      <Redirect to='/Login' />
         {props.authedUser === null ? 
         <Fragment>
+        {/* <Redirect to='/Login' /> */}
         <Typography className="header" variant="h6" >
         Would You Rather App
         </Typography>
 
         <Typography mx="auto" variant="h6" className={classes.title}>
         <Typography>
-      <NavLink to="/Login"activeclass="active" color="inherit" className={classes.link}>
+      <NavLink to="/login"activeclass="active" color="inherit" className={classes.link}>
          Login
       </NavLink>
-      <NavLink to="/LeaderBoard"  activeclass="active" color="inherit" className={classes.link}>
+      <NavLink to="/leaderboard"  activeclass="active" color="inherit" className={classes.link}>
         LeaderBoard
       </NavLink>
         </Typography>
@@ -68,22 +68,26 @@ export default function Nav (props) {
         <Typography className="header" variant="h6" >
         Would You Rather App
         </Typography>
+        <Typography style={{marginLeft:'2%'}} variant="h7" >
+        {props.user.name}
+        </Typography>
+
         <Typography mx="auto" variant="h6" className={classes.title}>
         
         <Typography >
       <NavLink to={`/${props.authedUser}`} activeclass="active" color="inherit" className={classes.link}>
         Home
       </NavLink>
-      <NavLink to="/NewQuestions"  activeclass="active" color="inherit" className={classes.link}>
+      <NavLink to="/add"  activeclass="active" color="inherit" className={classes.link}>
         New Quastion
       </NavLink>
-      <NavLink to="/LeaderBoard"  activeclass="active" color="inherit" className={classes.link}>
+      <NavLink to="/leaderboard"  activeclass="active" color="inherit" className={classes.link}>
         LeaderBoard
       </NavLink>
     </Typography>
         </Typography>
         <Typography>
-      <NavLink to="/Login" onClick={handle_LogOut} activeclass="active" color="inherit" className={classes.link}>
+      <NavLink to="/login" onClick={handle_LogOut} activeclass="active" color="inherit" className={classes.link}>
         LogOut
       </NavLink>
     </Typography>
