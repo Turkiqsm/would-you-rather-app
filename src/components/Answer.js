@@ -43,6 +43,7 @@ class Answer extends Component {
     render() {
         const {  toHome,value } = this.state
         const { name, avatar,authedUser ,answers,err } = this.props
+        console.log(this.props.questionID)
         if(err) {
             return (
                 <div>
@@ -97,23 +98,23 @@ class Answer extends Component {
 }
 }
 function mapStateToProps ({ questions,authedUser, users}, props) {
-    const { id } = props.match.params
-    if(questions[id] === undefined) {
+    const { question_id} = props.match.params
+    if(questions[question_id] === undefined) {
         const err = true;
         return {
             err
         }
     }
-    const author = questions[id].author
-    const name = users[questions[id].author].name
+    const author = questions[question_id].author
+    const name = users[questions[question_id].author].name
     const avatar = users[author].avatarURL
-    const answers = [questions[id].optionOne.text , questions[id].optionTwo.text]
+    const answers = [questions[question_id].optionOne.text , questions[question_id].optionTwo.text]
   return {
     author: author,
     avatar: avatar,
     name: name,
     answers: answers,
-    questionID: id,
+    questionID: question_id,
     authedUser:authedUser
 
   }

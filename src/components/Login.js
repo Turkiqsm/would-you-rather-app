@@ -23,12 +23,17 @@ class Login extends Component {
     render() {
 
         const {usersInfo , authedUser,location } = this.props
-
+        console.log(location.state)
         const { from } = location.state || { from: { pathname: `/${authedUser}`  }}
+
         if(authedUser !== null) {
+            if (from.pathname === '/add' || from.pathname === '/leaderboard' || from.pathname === `/${authedUser}` ){
             return (
                 <Redirect to={from} />
             )
+        }else{
+            return <Redirect to='/Page404'/>
+        }
         }
     return (
         <React.Fragment>

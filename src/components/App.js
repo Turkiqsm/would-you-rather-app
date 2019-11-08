@@ -38,10 +38,11 @@ class App extends Component {
                <Switch>
                   <Route path='/login' exact component={Login} />
                   <PrivateRoute path={`/${authedUser}`} exact component={Dashboard} />
-                  <PrivateRoute path='/questions/:id' exact component={Answer}/>
+                  <PrivateRoute path='/questions/:question_id' exact component={Answer}/>
                   <PrivateRoute path='/leaderboard' exact component={Leaderboard} />
                   <PrivateRoute path='/add' exact component={NewQuestions} />
-                  <Route component={Page404} />
+                  <Route path='/Page404' component={Page404} />
+                  <Route  component={Page404} />
                </Switch>
                 </div>
           </div>}

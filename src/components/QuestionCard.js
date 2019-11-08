@@ -15,7 +15,8 @@ import { NavLink } from 'react-router-dom'
 
 class QuestionCard extends Component {
     render(){
-      const {questionID ,name, avatar, authedUser ,answers,answered,onePercentage,TwoPercentage } = this.props
+      const {questionID ,name, avatar,answers,answered,onePercentage,TwoPercentage } = this.props
+      console.log(answered[questionID])
   return (
     <React.Fragment>
     <CssBaseline />
@@ -42,7 +43,7 @@ class QuestionCard extends Component {
 
         { Object.keys(answered).includes(questionID) ? 
             <Typography variant="body2"  component="p">
-                {answered[questionID] === answers[0] ?
+                {answered[questionID] === 'optionOne' ?
             <React.Fragment>
 
                 <FormControl component="fieldset" style={{margin:'4%'}}>
@@ -66,7 +67,7 @@ class QuestionCard extends Component {
             <FormLabel style={{marginBottom:'4%'}} component="legend">Would you Rather</FormLabel>
             <FormLabel style={{marginBottom:'4%'}} >{answers[0]}</FormLabel>
             <FormLabel style={{marginBottom:'4%'}} >{answers[1]}</FormLabel>
-            <NavLink to={`questions/${questionID}`} user={authedUser}  activeclass="active" color="inherit">
+            <NavLink to={`questions/${questionID}`}  activeclass="active" color="inherit">
                 <Fab
                 variant="extended"
                 size="medium"
